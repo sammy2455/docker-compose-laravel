@@ -16,6 +16,7 @@ Bringing up the Docker Compose network with `site` instead of just using `up`, e
 - **php** - `:9000`
 - **redis** - `:6379`
 - **mailhog** - `:8025`
+- **soketi** - `:6001`
 
 Three additional containers are included that handle Composer, NPM, and Artisan commands *without* having to have these platforms installed on your local computer. Use the following command examples from your project root, modifying them to fit your particular use case.
 
