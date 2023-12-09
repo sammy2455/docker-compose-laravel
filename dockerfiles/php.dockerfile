@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev  \
     libonig-dev  \
     libicu-dev \
+    libpq-dev \
     autoconf  \
     pkg-config  \
     libssl-dev
@@ -25,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd intl
 RUN pecl install -o -f redis && rm -rf /tmp/pear && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 #RUN pecl install mongodb \
