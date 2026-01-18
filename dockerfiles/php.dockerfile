@@ -5,6 +5,7 @@ ARG user
 ARG uid
 
 # Install system dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -20,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     autoconf  \
     pkg-config  \
-    libssl-dev
+    libssl-dev \
+    supervisor
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,6 +48,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && chown -R $user:$user /home/$user
 #RUN ls -s /home/sammy/samara /var/www
+
+# Crear directorio para logs de supervisor
+RUN mkdir -p /var/log/supervisor
 
 # Install sudo
 RUN apt-get update && apt-get -y install sudo
