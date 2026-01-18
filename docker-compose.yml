@@ -126,12 +126,13 @@ services:
     image: laravel/php
     container_name: supervisor
     restart: unless-stopped
+    user: root
     volumes:
       - ./app:/var/www/html
-      - ./dockerfiles/supervisord.conf:/etc/supervisord.conf
+      - ./dockerfiles/supervisor/supervisord.conf:/etc/supervisor/conf.d/laravel-worker.conf
     depends_on:
       - postgres
       - redis
     networks:
       - laravel
-    command: supervisord -c /etc/supervisord.conf
+    command: /usr/bin/supervisord -n
